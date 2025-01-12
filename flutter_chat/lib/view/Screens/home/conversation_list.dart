@@ -85,7 +85,7 @@ class ConversationList extends StatelessWidget {
                   chatUser.chatModellist?.isNotEmpty == true &&
                           chatModel.message?.msg.trim().isNotEmpty == true
                       ? chatModel.message!.msg
-                      : 'No messages',
+                      : 'No ',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
