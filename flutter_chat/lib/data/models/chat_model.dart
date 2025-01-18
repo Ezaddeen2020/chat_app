@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:chat_application/data/models/messages_model.dart';
+import 'package:chatapp/data/models/messages_model.dart';
 
 // Parse JSON string into a ChatModel object
 ChatModel chatModelFromJson(String str) => ChatModel.fromJson(json.decode(str));

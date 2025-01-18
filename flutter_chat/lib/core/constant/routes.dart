@@ -9,12 +9,13 @@ class AppRoute {
   // static const String logout = '/logout';
   static const String signUp = '/signup';
   static const String successSignUp = '/successsignup';
-  static const String emailVerifyCode = '/emailverifycode'; 
+  static const String emailVerifyCode = '/emailverifycode';
   static const String forgetPassword = '/forgetPassword';
   static const String resetPassword = '/resetPassword';
   static const String checkEmail = '/checkemail';
+  static const String lang = '/language';
 
-  //home 
+  //home
   // static const String homescreen = '/homescreen';
   static const String homeTest = '/hometest';
   static const String cameraPage = '/camerapage';

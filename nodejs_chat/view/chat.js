@@ -98,48 +98,78 @@ const editData = (req, res) => {
 // .params when the valuse passes in the URL    .body
 //This code is needed to retrieve the latest chat messages for a specific user. The goal is to get the most recent chat messages between the user and their chat partners.
     
-const getData = (req, res)=>{
-        const {userid} = req.params;    //The userid parameter is extracted from the req.params object. This userid will be used to filter the chat messages.
-        const query = ` 
-        SELECT 
-        u.*,
-        c.*
-    FROM 
-        users u
-    JOIN
-        (
-            SELECT 
-                MAX(msg_id) AS max_id_chat,           
-                CASE 
-                    WHEN sender_id = ? THEN receiver_id
-                    WHEN receiver_id = ? THEN sender_id
-                END AS other_user   
-            FROM 
-                chats
-            WHERE 
-                (sender_id = ? OR receiver_id = ?)
+// const getData = (req, res)=>{
+//         const {userid} = req.params;    //The userid parameter is extracted from the req.params object. This userid will be used to filter the chat messages.
+//         const query = ` 
+//         SELECT 
+//         u.*,
+//         c.*
+//     FROM 
+//         users u
+//     JOIN
+//         (
+//             SELECT 
+//                 MAX(msg_id) AS max_id_chat,           
+//                 CASE 
+//                     WHEN sender_id = ? THEN receiver_id
+//                     WHEN receiver_id = ? THEN sender_id
+//                 END AS other_user   
+//             FROM 
+//                 chats
+//             WHERE 
+//                 (sender_id = ? OR receiver_id = ?)
             
+//             GROUP BY
+//                 other_user
+//         ) AS latest_chat ON u.user_id = latest_chat.other_user
+//     JOIN
+//         chats c ON c.msg_id = latest_chat.max_id_chat
+//     ORDER BY
+//         c.msg_date DESC ;`;
+
+//         connect.query(query, [userid, userid, userid, userid], async (e, result) => {
+//             if (e) return res.json({ error: `error in ${e}` });
+//             res.json({ status: "success", data: result });
+//           });
+//     }
+
+
+    const getData = (req, res) => {
+      const { userid } = req.params;
+      const query = `
+        SELECT 
+          u.*, 
+          c.*, 
+          CASE 
+            WHEN c.msg_view = 0 THEN 'unviewed' 
+            ELSE 'viewed' 
+          END AS msg_status 
+        FROM 
+          users u
+        JOIN 
+          (SELECT 
+              MAX(msg_id) AS max_id_chat,           
+              CASE 
+                WHEN sender_id = ? THEN receiver_id
+                WHEN receiver_id = ? THEN sender_id
+              END AS other_user   
+            FROM 
+              chats
+            WHERE 
+              (sender_id = ? OR receiver_id = ?)
             GROUP BY
-                other_user
-        ) AS latest_chat ON u.user_id = latest_chat.other_user
-    JOIN
-        chats c ON c.msg_id = latest_chat.max_id_chat
-    ORDER BY
-        c.msg_date DESC ;`;
-
-        connect.query(query, [userid, userid, userid, userid], async (e, result) => {
-            if (e) return res.json({ error: `error in ${e}` });
-        
-            // إضافة عدد الرسائل غير المقروءة لكل مستخدم
-            // for (let user of result) {
-            //   user.countNotRead = await getUnreadMsgCount(user.user_id);
-            // }  
-        
-            res.json({ status: "success", data: result });
-          });
-    }
-
-
+              other_user) AS latest_chat 
+        ON u.user_id = latest_chat.other_user
+        JOIN chats c ON c.msg_id = latest_chat.max_id_chat
+        ORDER BY 
+          c.msg_date DESC`;
+    
+      connect.query(query, [userid, userid, userid, userid], (e, result) => {
+        if (e) return res.json({ error: `Error in ${e}` });
+        res.json({ status: "success", data: result });
+      });
+    };
+    
 
 const loadData = (req, res) => {
     const { senderId, receiverId} = req.params;

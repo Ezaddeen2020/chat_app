@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:chat_application/view/Screens/camera/camera_screen.dart';
-import 'package:chat_application/view/Screens/camera/camera_view_screen.dart';
+import 'package:chatapp/view/Screens/camera/camera_screen.dart';
+import 'package:chatapp/view/Screens/camera/camera_view_screen.dart';
 
-// Main Attachment Bottom Sheet
 class AttachmentBottomSheet extends StatelessWidget {
-  AttachmentBottomSheet({super.key});
-
   final ImagePicker picker = ImagePicker();
+
+  AttachmentBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class AttachmentBottomSheet extends StatelessWidget {
               _buildRow([
                 _createIcon(Icons.insert_drive_file, Colors.indigo, "Document", () {}),
                 _createIcon(Icons.camera_alt, Colors.pink, "Camera", () {
-                  Get.to(() => CameraScreen());
+                  Get.to(() => const CameraScreen());
                 }),
                 _createIcon(Icons.insert_photo, Colors.purple, "Gallery", () async {
                   final file = await picker.pickImage(source: ImageSource.gallery);

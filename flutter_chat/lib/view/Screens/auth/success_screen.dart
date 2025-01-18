@@ -1,16 +1,15 @@
-import 'package:chat_application/controller/auth/success_controller.dart';
-import 'package:chat_application/core/constant/colors.dart';
-import 'package:chat_application/view/widgets/auth/custom_bottom_auth.dart';
+import 'package:chatapp/controller/auth/success_controller.dart';
+import 'package:chatapp/core/constant/colors.dart';
+import 'package:chatapp/view/widgets/auth/custom_bottom_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SuccessSignupScreen extends GetView<SuccessSignUpControllerImp> {
+class SuccessSignupScreen extends StatelessWidget {
   const SuccessSignupScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // SuccessSignUpControllerImp controller =
-    Get.put(SuccessSignUpControllerImp());
+    var controller = Get.put(SuccessSignUpControllerImp());
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundColor,

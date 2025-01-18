@@ -1,6 +1,6 @@
-// import 'package:chat_application/core/localization/change_local.dart';
-// import 'package:chat_application/data/models/country_model.dart';
-// import 'package:chat_application/view/Screens/phone_number/countery_screen.dart';
+// import 'package:chatapp/core/localization/change_local.dart';
+// import 'package:chatapp/data/models/country_model.dart';
+// import 'package:chatapp/view/Screens/phone_number/countery_screen.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 

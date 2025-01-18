@@ -1,5 +1,6 @@
 
 const connect = require("../config/connect");
+require('dotenv').config();
 
 
   //============================= Login ===============================
@@ -163,91 +164,219 @@ function updateverifycode(code , id_otp, checked){
 
 
 
+  
+
+  const nodemailer = require("nodemailer");
+
+/**
+ * توليد رمز تحقق عشوائي مكون من 6 أرقام
+ * @returns {string} - رمز التحقق العشوائي
+ */
+function generateOtp() {
+  return Math.floor(100000 + Math.random() * 900000).toString(); // يولد رقم عشوائي من 6 أرقام
+}
+
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // إذا كنت تستخدم الاتصال غير المشفر
+  auth: {
+    user: process.env.EMAIL_USER,  // البريد الإلكتروني من المتغير
+    pass: process.env.EMAIL_PASS   // كلمة المرور أو كلمة مرور التطبيق
+  }
+});
+
+
+/**
+ * إرسال الكود عبر البريد الإلكتروني باستخدام Nodemailer.
+ * @param {string} email - البريد الإلكتروني المستلم.
+ * @param {string} code - رمز التحقق الذي سيتم إرساله.
+ */
+async function sendCodeToEmail(email, code) {
+  try {
+    const mailOptions = {
+      from: '"Chat App" <azoozalqubati774@gmail.com>', // المرسل
+      to: email, // المستلم
+      subject: "رمز التحقق الخاص بك", // موضوع الرسالة
+      text: `رمز التحقق الخاص بك هو: ${code}`, // نص الرسالة
+      html: `<p>رمز التحقق الخاص بك هو: <strong>${code}</strong></p>` // الرسالة بتنسيق HTML
+    };
+
+    // إرسال البريد الإلكتروني
+    const info = await transporter.sendMail(mailOptions);
+    console.log("تم إرسال البريد بنجاح:", info.response);
+  } catch (error) {
+    console.error("خطأ أثناء إرسال البريد الإلكتروني:", error.message);
+  }
+}
+
+async function sendEmail(email) {
+  const id_otp = generateOtp();
+  const verifycode = Math.floor(10000 + Math.random() * 90000);
+  const sql = "INSERT INTO verifycode (email, code, id_otp) VALUES (?, ?, ?)";
+
+  connect.query(sql, [email, verifycode, id_otp], async (err, result) => {
+    if (err) {
+      console.error("Error inserting verification code:", err);
+      return;
+    }
+
+    if (result.affectedRows > 0) {
+      await sendCodeToEmail(email, verifycode); // استدعاء الدالة الجديدة لإرسال البريد الإلكتروني
+    }
+  });
+
+  return id_otp;
+}
+
+
+  // const fetchContacts=((req,res)=>{
+
+  // })
+
+
+module.exports = {login,signup,resetpass,logout,verifycodefun,resendCode,check_email,updateToken};
+
+
+
   //============================= Send Email Function ===============================
 
-async function sendEmail(email)  {
-    const id_otp = generateOtp();
-    const verifycode = Math.floor(10000 + Math.random() * 90000);
-    const sql = "INSERT INTO verifycode (email, code, id_otp) VALUES (?, ?, ?)";
+// async function sendEmail(email)  {
+//     const id_otp = generateOtp();
+//     const verifycode = Math.floor(10000 + Math.random() * 90000);
+//     const sql = "INSERT INTO verifycode (email, code, id_otp) VALUES (?, ?, ?)";
   
-    connect.query(sql, [email, verifycode, id_otp], async (err, result) => {
-      if (err) {
-        console.error('Error inserting verification code:', err);
-        return;
-      }
+//     connect.query(sql, [email, verifycode, id_otp], async (err, result) => {
+//       if (err) {
+//         console.error('Error inserting verification code:', err);
+//         return;
+//       }
   
-      if (result.affectedRows > 0) {
-       await sendCodeToEmail(email,verifycode); //بعد عملية انشاء و اضافة اوتيبي و الايميل و الكود الى جدول التحقق يتم ارسال الايميل و الكود معا الى هذه الدالة
-      }
+//       if (result.affectedRows > 0) {
+//        await sendCodeToEmail(email,verifycode); //بعد عملية انشاء و اضافة اوتيبي و الايميل و الكود الى جدول التحقق يتم ارسال الايميل و الكود معا الى هذه الدالة
+//       }
       
-    });
-    return id_otp;
-}
+//     });
+//     return id_otp;
+// }
   
-  function generateOtp() {
-    const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const shuffle = (str) => str.split('').sort(() => 0.5 - Math.random()).join('');
-    const group1 = shuffle(characters).substring(0, 5);
-    const group2 = shuffle(characters).substring(0, 5);
-    const group3 = shuffle(characters).substring(0, 5);
-    return `${group1}-${group2}-${group3}`;
-  }
+//   function generateOtp() {
+//     const characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+//     const shuffle = (str) => str.split('').sort(() => 0.5 - Math.random()).join('');
+//     const group1 = shuffle(characters).substring(0, 5);
+//     const group2 = shuffle(characters).substring(0, 5);
+//     const group3 = shuffle(characters).substring(0, 5);
+//     return `${group1}-${group2}-${group3}`;
+//   }
 
 
 
-  //============================= Send ===============================
+//   //============================= Send ===============================
 
-  const https = require('https');
-  const querystring = require('querystring');// convert the js ob to the query string it used in the URL
+  // const https = require('https');
+  // const querystring = require('querystring');// convert the js ob to the query string it used in the URL
   
-  /**
-   * Sends an email and code to the PHP endpoint.
-  //  * @param {string} email - The email address to send.
-  //  * @param {string} code - The code to send.
-  //  */
-  function sendCodeToEmail(email, code) {
-    // Define the data to be sent
-    const postData = querystring.stringify({
-      email: email,
-      code: code  
-    });
+  // /**
+  //  * Sends an email and code to the PHP endpoint.
+  // //  * @param {string} email - The email address to send.
+  // //  * @param {string} code - The code to send.
+  // //  */
+  // function sendCodeToEmail(email, code) {
+  //   // Define the data to be sent
+  //   const postData = querystring.stringify({
+  //     email: email,
+  //     code: code  
+  //   });
   
-    // Define the request options (ارسال طلب الى السيرفر)
-    const options = {
-      hostname: 'azaldeen.meta-code-ye.com',
-      port: 443,
-      path: '/eco_php/auth/link_vps.php',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': Buffer.byteLength(postData)// حساب طول البيانات المرسلة
-      }
-    };
+  //   // Define the request options (ارسال طلب الى السيرفر)
+  //   const options = {
+  //     hostname: 'azaldeen.meta-code-ye.com',
+  //     port: 443,
+  //     path: '/eco_php/auth/link_vps.php',
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/x-www-form-urlencoded',
+  //       'Content-Length': Buffer.byteLength(postData)// حساب طول البيانات المرسلة
+  //     }
+  //   };
   
-    // Create the request (انشاء الطلب)
-    const req = https.request(options, (res) => {
-      let responseData = '';    // متغير يُستخدم لتخزين البيانات المستلمة من الخادم.
+  //   // Create the request (انشاء الطلب)
+  //   const req = https.request(options, (res) => {
+  //     let responseData = '';    // متغير يُستخدم لتخزين البيانات المستلمة من الخادم.
   
-      res.on('data', (chunk) => { // responseData عندما تصل من الخادم إلى chunks تستخدم لإضافة بيانات جديدة
-        responseData += chunk;
-      });
+  //     res.on('data', (chunk) => { // responseData عندما تصل من الخادم إلى chunks تستخدم لإضافة بيانات جديدة
+  //       responseData += chunk;
+  //     });
   
-      res.on('end', () => {     //حدث يُشير إلى انتهاء استلام البيانات. يتم فيه طباعة الاستجابة الكاملة end معالجة نهاية الطلب
-        console.log('Response:', responseData);
-      });
-    });
+  //     res.on('end', () => {     //حدث يُشير إلى انتهاء استلام البيانات. يتم فيه طباعة الاستجابة الكاملة end معالجة نهاية الطلب
+  //       console.log('Response:', responseData);
+  //     });
+  //   });
   
-    // Handle errors
-    req.on('error', (e) => {
-      console.error('Error:', e.message);
-    });
+  //   // Handle errors
+  //   req.on('error', (e) => {
+  //     console.error('Error:', e.message);
+  //   });
   
-    // Write the data to the request body
-    req.write(postData);
+  //   // Write the data to the request body
+  //   req.write(postData);
   
-    // End the request
-    req.end();
-  }
+  //   // End the request
+  //   req.end();
+  // }
+
+
+
+
+// API endpoint
+// app.post('/fetchUsersByPhoneNumbers', (req, res) => {
+//   const { contacts } = req.body;
+
+//   // Validate input
+//   if (!contacts || contacts.length === 0) {
+//     return res.json({
+//       status: 'success',
+//       data: [], // No registered users
+//       to_invite: contacts, // All contacts are unregistered
+//     });
+//   }
+
+//   // Extract phone numbers
+//   const phoneNumbers = contacts.map(contact => contact.user_phone);
+
+//   // Query the database
+//   const sql = `
+//     SELECT user_id, user_name, user_phone, user_status 
+//     FROM users 
+//     WHERE user_phone IN (?)
+//   `;
+//   connect.query(sql, [phoneNumbers], (err, results) => {
+//     if (err) {
+//       console.error('Database error:', err);
+//       return res.status(500).json({ error: 'Database error' });
+//     }
+
+//     // Extract registered phone numbers
+//     const matchedPhones = results.map(user => user.user_phone);
+
+//     // Create a list of unregistered contacts
+//     const toInviteUsers = contacts
+//       .filter(contact => !matchedPhones.includes(contact.user_phone))
+//       .map(contact => ({
+//         user_name: contact.user_name,
+//         user_phone: contact.user_phone,
+//       }));
+
+//     // Return the response
+//     return res.json({
+//       status: 'success',
+//       data: results, // Registered users
+//       to_invite: toInviteUsers, // Unregistered contacts
+//     });
+//   });
+// });
+
 
 
 
@@ -266,7 +395,7 @@ async function sendEmail(email)  {
     
 //     // استخراج الأرقام فقط من جهات الاتصال لإجراء الاستعلام
 //     const phoneNumbers = contacts.map(e => e.user_phone);    // استعلام للتحقق من الأرقام في قاعدة البيانات
-    
+
 //     const sql = `SELECT u.user_id, u.user_name, u.user_phone, u.user_status FROM users u WHERE u.user_phone IN (?)`;
 //     connect.query(sql, [phoneNumbers], (err, results) => {
 //       if (err) {
@@ -310,45 +439,8 @@ async function sendEmail(email)  {
 
 
   
-module.exports = {login,signup,resetpass,logout,verifycodefun,resendCode, check_email,updateToken};
 
 
-
-
-
-
-
-// const inviteNewUsers = async (req, res) => {
-//   const { contacts } = req.body; // جهات الاتصال المستلمة من العميل (رقم الهاتف)
-
-//   try {
-//       const sql = `
-//           SELECT 
-//               user_phone 
-//           FROM 
-//               users 
-//           WHERE 
-//               user_phone IN (?)`;
-
-//       connect.query(sql, [contacts], (err, results) => {
-//           if (err) {
-//               console.error('Database error:', err);
-//               return res.status(500).json({ error: 'Database error, please try again later.' });
-//           }
-
-//           // قائمة الأرقام المسجلة
-//           const registeredPhones = results.map(user => user.user_phone);
-
-//           // المستخدمين الذين يحتاجون إلى دعوة
-//           const unregisteredContacts = contacts.filter(contact => !registeredPhones.includes(contact));
-
-//           return res.json({ status: 'success', data: unregisteredContacts });
-//       });
-//   } catch (err) {
-//       console.error('Unexpected error:', err);
-//       return res.status(500).json({ error: 'Database error, please try again later.' });
-//   }
-// };
 
 
 

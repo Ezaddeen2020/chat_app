@@ -1,10 +1,18 @@
-// import 'package:chat_application/controller/home_controller.dart';
-// import 'package:chat_application/core/constant/routes.dart';
+
+
+
+
+
+
+
+
+// import 'package:chatapp/controller/home_controller.dart';
+// import 'package:chatapp/core/constant/routes.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// import 'package:chat_application/controller/auth/featch_users_controller.dart';
-// import 'package:chat_application/core/classes/status_request.dart';
-// import 'package:chat_application/data/models/chat_user_model.dart';
+// import 'package:chatapp/controller/auth/featch_users_controller.dart';
+// import 'package:chatapp/core/classes/status_request.dart';
+// import 'package:chatapp/data/models/chat_user_model.dart';
 
 // class SelectContacts extends StatelessWidget {
 //   SelectContacts({super.key});
@@ -144,7 +152,7 @@
 //                   return const Padding(
 //                     padding: EdgeInsets.only(left: 20, top: 10),
 //                     child: Text(
-//                       "Invite to chat_application",
+//                       "Invite to ChatApp",
 //                       style: TextStyle(
 //                           color: Color.fromARGB(255, 198, 105, 215),
 //                           fontSize: 14),

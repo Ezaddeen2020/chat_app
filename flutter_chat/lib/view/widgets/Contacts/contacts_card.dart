@@ -1,8 +1,8 @@
 // // contact_tile.dart
 
 // import 'package:flutter/material.dart';
-// import 'package:chat_application/data/models/chat_user_model.dart';
-// import 'package:chat_application/controller/home_controller.dart';
+// import 'package:chatapp/data/models/chat_user_model.dart';
+// import 'package:chatapp/controller/home_controller.dart';
 // import 'package:get/get.dart';
 
 // class ContactTile extends StatelessWidget {

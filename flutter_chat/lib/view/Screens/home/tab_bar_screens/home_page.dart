@@ -1,17 +1,13 @@
-import 'package:chat_application/controller/screens/message_conttoller.dart';
-import 'package:chat_application/core/constant/routes.dart';
-import 'package:chat_application/data/models/preferences.dart';
-import 'package:chat_application/view/Screens/auth/login_screen.dart';
-import 'package:chat_application/view/Screens/home/menu_screens/settings.dart';
+import 'package:chatapp/core/constant/routes.dart';
+import 'package:chatapp/view/Screens/home/menu_screens/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:chat_application/controller/home_controller.dart';
-import 'package:chat_application/view/Screens/home/conversation_list.dart';
+import 'package:chatapp/controller/home_controller.dart';
+import 'package:chatapp/view/Screens/home/conversation_list.dart';
 
 class HomePage extends GetView<HomeController> {
   HomePage({super.key});
 
-  final MessageController msgController = MessageController();
   final ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
@@ -28,7 +24,7 @@ class HomePage extends GetView<HomeController> {
           if (controller.isSelected.value) {
             return Text('${controller.selectedIndex.length} تم تحديد ');
           }
-          return const Text('chat_application');
+          return const Text('ChatApp');
         }),
         leading: Obx(() {
           if (controller.isSelected.value) {
@@ -91,10 +87,7 @@ class HomePage extends GetView<HomeController> {
                       ),
                       PopupMenuItem(
                         value: "Logout",
-                        onTap: () async {
-                          await Preferences.clearSharPreference();
-                          Get.offAll(() => const LoginScreen());
-                        },
+                        onTap: controller.userController.logout,
                         child: const Text("Logout"),
                       ),
                     ];

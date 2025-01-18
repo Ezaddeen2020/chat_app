@@ -1,13 +1,13 @@
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/core/constant/routes.dart';
-import 'package:chat_application/core/functions/handling_data.dart';
-import 'package:chat_application/data/datasource/remote/auth/checkemail_data.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/core/constant/routes.dart';
+import 'package:chatapp/core/functions/handling_data.dart';
+import 'package:chatapp/data/datasource/remote/auth/auth_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class ForgetpasswordControllerImp extends GetxController {
-  late CheckEmailData checkEmailData = CheckEmailData(Get.find());
+  AuthData checkEmailData = AuthData(Get.find());
   final forgetPasswordFormKey = GlobalKey<FormState>();
   StatusRequest statusRequest = StatusRequest.none;
   var email = TextEditingController();
@@ -18,7 +18,7 @@ class ForgetpasswordControllerImp extends GetxController {
       isLoading.value = true;
       statusRequest = StatusRequest.loading;
 
-      var response = await checkEmailData.postdata(email.text);
+      var response = await checkEmailData.checkEmailFun(email.text);
       statusRequest = handlingData(response);
 
       if (statusRequest == StatusRequest.success && response['status'] == "success") {
@@ -30,7 +30,6 @@ class ForgetpasswordControllerImp extends GetxController {
       } else {
         Get.defaultDialog(title: "Warning", middleText: "Email Not Found");
       }
-
       isLoading.value = false;
     }
   }

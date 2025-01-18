@@ -1,8 +1,8 @@
-import 'package:chat_application/controller/home_controller.dart';
-import 'package:chat_application/controller/screens/message_conttoller.dart';
-import 'package:chat_application/view/Screens/home/indiviual_chat/appbar_chat.dart';
-import 'package:chat_application/view/Screens/home/indiviual_chat/message_items.dart';
-import 'package:chat_application/view/Screens/home/indiviual_chat/message_send.dart';
+import 'package:chatapp/controller/home_controller.dart';
+import 'package:chatapp/controller/screens/message_conttoller.dart';
+import 'package:chatapp/view/Screens/home/indiviual_chat/appbar_chat.dart';
+import 'package:chatapp/view/Screens/home/indiviual_chat/message_items.dart';
+import 'package:chatapp/view/Screens/home/indiviual_chat/message_send.dart';
 import 'package:flutter/material.dart';
 import 'package:mc_utils/mc_utils.dart';
 import 'package:swipe_to/swipe_to.dart';
@@ -25,7 +25,7 @@ class IndiviualScreen extends StatelessWidget {
         ),
         Scaffold(
           backgroundColor: Colors.transparent,
-          appBar: const chat_applicationBar(),
+          appBar: const ChatAppBar(),
           body: Column(
             children: [
               Expanded(
@@ -73,12 +73,12 @@ class IndiviualScreen extends StatelessWidget {
 
 
 
-// import 'package:chat_application/view/Screens/home/indiviual_chat/appbar_chat.dart';
-// import 'package:chat_application/view/Screens/home/indiviual_chat/message_chat.dart';
-// import 'package:chat_application/view/Screens/home/indiviual_chat/message_send.dart';
+// import 'package:chatapp/view/Screens/home/indiviual_chat/appbar_chat.dart';
+// import 'package:chatapp/view/Screens/home/indiviual_chat/message_chat.dart';
+// import 'package:chatapp/view/Screens/home/indiviual_chat/message_send.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// import 'package:chat_application/controller/screens/indiviual_controller.dart';
+// import 'package:chatapp/controller/screens/indiviual_controller.dart';
 
 // class IndiviualScreen extends StatelessWidget {
 //   final TextEditingController myController = TextEditingController();
@@ -100,7 +100,7 @@ class IndiviualScreen extends StatelessWidget {
 //         ),
 //         Scaffold(
 //           backgroundColor: Colors.transparent,
-//           appBar: chat_applicationBar(controller: controller),
+//           appBar: ChatAppBar(controller: controller),
 //           body: Column(
 //             children: [
 //               Expanded(
@@ -120,13 +120,13 @@ class IndiviualScreen extends StatelessWidget {
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // import 'package:image_picker/image_picker.dart';
-// import 'package:chat_application/controller/screens/indiviual_controller.dart';
-// import 'package:chat_application/view/Screens/camera/camera_screen.dart';
-// import 'package:chat_application/view/Screens/camera/camera_view_screen.dart';
-// import 'package:chat_application/view/Screens/indiviual_chat/real_chat_message/reply_message.dart';
-// import 'package:chat_application/view/Screens/indiviual_chat/real_chat_message/send_image_card.dart';
-// import 'package:chat_application/view/Screens/indiviual_chat/real_chat_message/send_message.dart';
-// import 'package:chat_application/view/widgets/onboarding/emoji_picker.dart';
+// import 'package:chatapp/controller/screens/indiviual_controller.dart';
+// import 'package:chatapp/view/Screens/camera/camera_screen.dart';
+// import 'package:chatapp/view/Screens/camera/camera_view_screen.dart';
+// import 'package:chatapp/view/Screens/indiviual_chat/real_chat_message/reply_message.dart';
+// import 'package:chatapp/view/Screens/indiviual_chat/real_chat_message/send_image_card.dart';
+// import 'package:chatapp/view/Screens/indiviual_chat/real_chat_message/send_message.dart';
+// import 'package:chatapp/view/widgets/onboarding/emoji_picker.dart';
 // import 'package:intl/intl.dart';
 
 // // ignore: must_be_immutable

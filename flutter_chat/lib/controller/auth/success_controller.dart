@@ -1,4 +1,4 @@
-import 'package:chat_application/core/constant/routes.dart';
+import 'package:chatapp/core/constant/routes.dart';
 import 'package:get/get.dart';
 
 abstract class SuccessSignUpController extends GetxController {

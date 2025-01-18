@@ -1,9 +1,9 @@
-import 'package:chat_application/controller/home_controller.dart';
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/view/Screens/camera/camera_screen.dart';
-import 'package:chat_application/view/Screens/home/tab_bar_screens/contacts_page.dart';
-import 'package:chat_application/view/Screens/home/tab_bar_screens/home_page.dart';
-import 'package:chat_application/view/Screens/home/tab_bar_screens/profiel_page.dart';
+import 'package:chatapp/controller/home_controller.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/view/Screens/camera/camera_screen.dart';
+import 'package:chatapp/view/Screens/home/tab_bar_screens/contacts_page.dart';
+import 'package:chatapp/view/Screens/home/tab_bar_screens/home_page.dart';
+import 'package:chatapp/view/Screens/home/tab_bar_screens/profiel_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +25,7 @@ class HomeTest extends GetView<HomeController> {
                   controller: controller.pageController,
                   onPageChanged: (index) => controller.onPageChanged(index),
                   children: [
-                    const CameraScreen(),
+                    CameraScreen(),
                     HomePage(),
                     const ProfilePage(),
                     ContactPage(),

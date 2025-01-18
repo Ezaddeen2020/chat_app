@@ -1,7 +1,7 @@
-import 'package:chat_application/controller/home_controller.dart';
-import 'package:chat_application/links_api.dart';
+import 'package:chatapp/controller/home_controller.dart';
+import 'package:chatapp/links_api.dart';
 import 'package:flutter/material.dart';
-import 'package:chat_application/data/models/chat_user_model.dart';
+import 'package:chatapp/data/models/chat_user_model.dart';
 import 'package:mc_utils/mc_utils.dart';
 
 class ConversationList extends StatelessWidget {

@@ -1,16 +1,13 @@
-import 'package:chat_application/data/datasource/remote/chat/delete_msg_data.dart';
-import 'package:chat_application/data/datasource/remote/chat/edit_msg_data.dart';
-import 'package:chat_application/data/datasource/remote/chat/load_msg_data.dart';
-import 'package:chat_application/data/datasource/remote/chat/message_data.dart';
-import 'package:chat_application/controller/screens/user_controller.dart';
-import 'package:chat_application/core/functions/handling_data.dart';
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/data/models/chat_user_model.dart';
-import 'package:chat_application/data/models/messages_model.dart';
-import 'package:chat_application/controller/home_controller.dart';
-import 'package:chat_application/data/models/chat_model.dart';
-import 'package:chat_application/data/models/user_model.dart';
-import 'package:chat_application/socket/socket_class.dart';
+import 'package:chatapp/data/datasource/remote/chat/chat_data.dart';
+import 'package:chatapp/controller/screens/user_controller.dart';
+import 'package:chatapp/core/functions/handling_data.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/data/models/chat_user_model.dart';
+import 'package:chatapp/data/models/messages_model.dart';
+import 'package:chatapp/controller/home_controller.dart';
+import 'package:chatapp/data/models/chat_model.dart';
+import 'package:chatapp/data/models/user_model.dart';
+import 'package:chatapp/socket/socket_class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -20,10 +17,10 @@ class MessageController extends GetxController {
   final TextEditingController myController = TextEditingController();
   final homeController = Get.find<HomeController>();
 
-  final AddMessages addMessages = AddMessages(Get.find());
-  final EditMsgData editMessages = EditMsgData(Get.find());
-  final LoadMsgData loadmsgData = LoadMsgData(Get.find());
-  final DeleteMsgData deleteMsgVar = DeleteMsgData(Get.find());
+  // final AddMessages addMessages = AddMessages(Get.find());
+  final ChatData chatData = ChatData(Get.find());
+  // final LoadMsgData loadmsgData = LoadMsgData(Get.find());
+  // final DeleteMsgData deleteMsgVar = DeleteMsgData(Get.find());
   final userController = Get.find<UserController>();
   StatusRequest statusRequest = StatusRequest.none;
   final focusNode = FocusNode();
@@ -143,7 +140,7 @@ class MessageController extends GetxController {
 
     // if (recieverId != null) return;
 
-    final response = await loadmsgData.loadMsg(senderId, recieverId!);
+    final response = await chatData.loadMsg(senderId, recieverId!);
     statusRequest = handlingData(response);
     if (statusRequest == StatusRequest.success && response['status'] == "success") {
       List data = response['data'];
@@ -182,7 +179,7 @@ class MessageController extends GetxController {
     hideContainer();
     update();
     log('==============  تم إرسال الرسالة بوقت محلي : ${model.timestamp}==========');
-    final response = await addMessages.addMsgFun(model);
+    final response = await chatData.addMsgFun(model);
 
     if (StatusRequest.success == statusRequest && response['status'] == "success") {
       log('Response from server: ${response.toString()}');
@@ -193,7 +190,7 @@ class MessageController extends GetxController {
   void msgView(ChatModel msgViewModel) async {
     msgViewModel = msgViewModel.copyWith(msgView: true);
     SocketClass.sendMessage(msgViewModel, userModel!);
-    final res = await editMessages.editMsgData(msgViewModel);
+    final res = await chatData.editMsgData(msgViewModel);
     if (StatusRequest.success == statusRequest && res['status'] == "success") {
       log('Response from server: ${res.toString()}--------------------------------------');
     }
@@ -236,7 +233,7 @@ class MessageController extends GetxController {
     hideContainer();
     update();
 
-    final response = await editMessages.editMsgData(editModel!);
+    final response = await chatData.editMsgData(editModel!);
     if (StatusRequest.success == statusRequest && response['status'] == "success") {
       log("${response}edit_Message from server77777777 ");
     } else {
@@ -273,21 +270,21 @@ class MessageController extends GetxController {
 
 
 
-// import 'package:chat_application/core/classes/crud.dart';
-// import 'package:chat_application/data/datasource/remote/chat/delete_msg_data.dart';
-// import 'package:chat_application/data/datasource/remote/chat/edit_msg_data.dart';
-// import 'package:chat_application/data/datasource/remote/chat/load_msg_data.dart';
-// import 'package:chat_application/data/datasource/remote/chat/message_data.dart';
-// import 'package:chat_application/controller/screens/user_controller.dart';
-// import 'package:chat_application/core/functions/handling_data.dart';
-// import 'package:chat_application/core/classes/status_request.dart';
-// import 'package:chat_application/data/models/chat_user_model.dart';
-// import 'package:chat_application/data/models/messages_model.dart';
-// import 'package:chat_application/controller/home_controller.dart';
-// import 'package:chat_application/data/models/chat_model.dart';
-// import 'package:chat_application/data/models/user_model.dart';
-// import 'package:chat_application/links_api.dart';
-// import 'package:chat_application/socket/socket_class.dart';
+// import 'package:chatapp/core/classes/crud.dart';
+// import 'package:chatapp/data/datasource/remote/chat/delete_msg_data.dart';
+// import 'package:chatapp/data/datasource/remote/chat/edit_msg_data.dart';
+// import 'package:chatapp/data/datasource/remote/chat/load_msg_data.dart';
+// import 'package:chatapp/data/datasource/remote/chat/message_data.dart';
+// import 'package:chatapp/controller/screens/user_controller.dart';
+// import 'package:chatapp/core/functions/handling_data.dart';
+// import 'package:chatapp/core/classes/status_request.dart';
+// import 'package:chatapp/data/models/chat_user_model.dart';
+// import 'package:chatapp/data/models/messages_model.dart';
+// import 'package:chatapp/controller/home_controller.dart';
+// import 'package:chatapp/data/models/chat_model.dart';
+// import 'package:chatapp/data/models/user_model.dart';
+// import 'package:chatapp/links_api.dart';
+// import 'package:chatapp/socket/socket_class.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 // import 'package:get/get.dart';

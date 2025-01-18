@@ -1,5 +1,5 @@
-import 'package:chat_application/data/models/call_model.dart';
-import 'package:chat_application/view/Screens/home/tab_bar_screens/custom_appbar.dart';
+import 'package:chatapp/data/models/call_model.dart';
+import 'package:chatapp/view/Screens/home/tab_bar_screens/custom_camera_appbar.dart';
 import 'package:flutter/material.dart';
 
 class ContactPage extends StatelessWidget {

@@ -1,11 +1,10 @@
-import 'dart:developer';
 import 'dart:io';
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/core/constant/routes.dart';
-import 'package:chat_application/core/functions/handling_data.dart';
-import 'package:chat_application/data/datasource/remote/auth/signup_data.dart';
-import 'package:chat_application/data/datasource/remote/auth/upload_file.dart';
-import 'package:chat_application/data/models/user_model.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/core/constant/routes.dart';
+import 'package:chatapp/core/functions/handling_data.dart';
+import 'package:chatapp/data/datasource/remote/auth/auth_data.dart';
+import 'package:chatapp/data/datasource/remote/chat/chat_data.dart';
+import 'package:chatapp/data/models/user_model.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,8 +19,8 @@ abstract class SignUpController extends GetxController {
 class SignUpControllerImp extends SignUpController {
   //=======  Parameters of Sign up  =========//
   GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
-  late SignupData signupdata = SignupData(Get.find());
-  late UploadFile uploadFile = UploadFile(Get.find());
+  late AuthData signupdata = AuthData(Get.find());
+  late ChatData chatData = ChatData(Get.find());
   StatusRequest statusRequest = StatusRequest.none;
   late TextEditingController username;
   late TextEditingController email;
@@ -58,6 +57,7 @@ class SignUpControllerImp extends SignUpController {
     if (signupFormKey.currentState!.validate()) {
       // statusRequest = StatusRequest.loading;
       // update();
+      // var tokenddel = await FirebaseMessaging.instance.deleteToken();
       var token = await FirebaseMessaging.instance.getToken();
       var userModel = UserModel(
         userId: 0,
@@ -72,29 +72,29 @@ class SignUpControllerImp extends SignUpController {
       );
       // log(userModel.toJson().toString());
       // print("9999999999999999999999999999999999999999999999999999999999999");
-      var res = await uploadFile.postdataFiles(userModel, userImage!);
-      if (res['status'] == "success") {
-        var response = await signupdata.postdata(userModel);
-        // log("=========================$response");
-        statusRequest = handlingData(response);
-        if (StatusRequest.success == statusRequest) {
-          if (response['status'] == "success") {
-            Get.offNamed(
-              AppRoute.emailVerifyCode,
-              arguments: {
-                'email': email.text,
-                "password": password.text,
-                "id_otp": response['id_otp'],
-                "page": "signup"
-              },
-            );
-          } else {
-            Get.defaultDialog(
-                title: "Warning", middleText: response['message'] ?? "Email is already exists");
-            statusRequest = StatusRequest.failure;
-          }
+      await chatData.postdataFiles(userModel, userImage);
+      // if (res['status'] == "success") {
+      var response = await signupdata.signUpFunc(userModel);
+      // log("=========================$response");
+      statusRequest = handlingData(response);
+      if (StatusRequest.success == statusRequest) {
+        if (response['status'] == "success") {
+          Get.offNamed(
+            AppRoute.emailVerifyCode,
+            arguments: {
+              'email': email.text,
+              "password": password.text,
+              "id_otp": response['id_otp'],
+              "page": "signup"
+            },
+          );
+        } else {
+          Get.defaultDialog(
+              title: "Warning", middleText: response['message'] ?? "Email is already exists");
+          statusRequest = StatusRequest.failure;
         }
       }
+      // }
       update();
     }
   }

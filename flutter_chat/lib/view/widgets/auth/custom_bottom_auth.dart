@@ -1,9 +1,9 @@
-import 'package:chat_application/core/constant/colors.dart';
+import 'package:chatapp/core/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomButtonAuth extends StatelessWidget {
   const CustomButtonAuth({super.key, required this.text, this.onPressed});
-  final String text;
+  final String text; 
   final void Function()? onPressed;
 
   @override

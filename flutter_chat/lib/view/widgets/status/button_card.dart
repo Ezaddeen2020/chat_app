@@ -1,4 +1,4 @@
-// import 'package:chat_application/model/chatmodel.dart';
+// import 'package:chatapp/model/chatmodel.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 

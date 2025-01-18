@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_print
 import 'dart:async';
 import 'dart:developer';
-import 'package:chat_application/socket/socket_class.dart';
+import 'package:chatapp/socket/socket_class.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -12,7 +12,8 @@ SocketClass socketClass = SocketClass();
 //FCM الكلاس يحتوي على طرق لتهيئة الإشعارات (مثل التقديم في الواجهة الأمامية)، والاستماع للأحداث المتعلقة بالإشعارات، والحصول على التوكن الخاص ب
 class NotificationService {
   // 1. خاصية ثابتة تحتوي على الكائن الوحيد.
-  static final NotificationService _notificationService = NotificationService._internal();
+  static final NotificationService _notificationService =
+      NotificationService._internal();
 
   // 2. المنشئ الخاص الذي لا يسمح بإنشاء كائنات جديدة من الخارج.
   NotificationService._internal();
@@ -26,14 +27,15 @@ class NotificationService {
   Future<void> init() async {
     //تحديد كيفية عرض الاشعارات عندما يكون التطبيق مفتوح
     await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true);
-    FirebaseMessaging.instance
-        .getInitialMessage()
-        .then(hendleMessage); //routing on clicking to pages in App if it onBackground or terminated
+        .setForegroundNotificationPresentationOptions(
+            alert: true, badge: true, sound: true);
+    FirebaseMessaging.instance.getInitialMessage().then(
+        hendleMessage); //routing on clicking to pages in App if it onBackground or terminated
     FirebaseMessaging.onMessageOpenedApp.listen(
         hendleMessage); //listening on clicking to pages out App and app is terminate هذه الدالة تُستخدم للاستماع عندما يفتح المستخدم التطبيق من إشعار وهو في الخلفية أو عند إغلاقه.
     FirebaseMessaging.onMessage.listen((event) {
-      print("Received notification in foreground: ${event.notification?.title}");
+      print(
+          "Received notification in foreground: ${event.notification?.title}");
 
       // عرض الإشعار باستخدام flutter_local_notifications
       if (event.notification != null) {
@@ -61,7 +63,8 @@ class NotificationService {
   }
 
   void showNotification(String? title, String? body) async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    const AndroidNotificationDetails androidPlatformChannelSpecifics =
+        AndroidNotificationDetails(
       'default_channel', // معرف القناة
       'Default Channel', // اسم القناة
       importance: Importance.max,

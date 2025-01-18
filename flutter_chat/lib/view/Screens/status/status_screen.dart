@@ -1,5 +1,5 @@
-import 'package:chat_application/view/Screens/status/my_status.dart';
-import 'package:chat_application/view/Screens/status/other_status.dart';
+import 'package:chatapp/view/Screens/status/my_status.dart';
+import 'package:chatapp/view/Screens/status/other_status.dart';
 import 'package:flutter/material.dart';
 
 class StatusPage extends StatefulWidget {

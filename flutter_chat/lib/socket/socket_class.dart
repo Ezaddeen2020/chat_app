@@ -1,10 +1,10 @@
 // ignore_for_file: avoid_print
 
 import 'dart:developer';
-import 'package:chat_application/data/models/chat_model.dart';
-import 'package:chat_application/data/models/preferences.dart';
-import 'package:chat_application/data/models/user_model.dart';
-import 'package:chat_application/links_api.dart';
+import 'package:chatapp/data/models/chat_model.dart';
+import 'package:chatapp/data/models/preferences.dart';
+import 'package:chatapp/data/models/user_model.dart';
+import 'package:chatapp/links_api.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 IO.Socket? socket;

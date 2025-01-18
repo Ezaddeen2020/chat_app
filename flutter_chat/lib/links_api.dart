@@ -1,10 +1,10 @@
 class AppLinks {
   static String server =
       // "http://10.0.70.9:5000";
-      // "http://192.168.137.1:5000";
-      // "http://192.168.60.207:5000";
-      // "http://192.16.100.233:5000";
+      // "http://192.16.100.246:5000";
       "http://192.168.60.207:5000";
+  // "http://192.16.100.244:5000";
+  // "http://192.168.43.207:5000";
   // "http://216.244.75.253:5000";
 
   // "https://azooz-vps.meta-code-ye.com";
@@ -17,6 +17,7 @@ class AppLinks {
   static String verifcodeSignup = "$server/verifycodefun";
   static String checkEmail = "$server/check_email";
   static String resetPassword = "$server/resetpass";
+  static String resend = "$server/resendcode";
 
   //============================= Home Page processing  ===============================//
 

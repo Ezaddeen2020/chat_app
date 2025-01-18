@@ -1,4 +1,4 @@
-// import 'package:chat_application/data/models/call_model.dart';
+// import 'package:chatapp/data/models/call_model.dart';
 // import 'package:flutter/material.dart';
 
 // class CallScreen extends StatelessWidget {

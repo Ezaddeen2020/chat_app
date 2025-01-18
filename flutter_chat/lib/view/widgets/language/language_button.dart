@@ -1,4 +1,4 @@
-import 'package:chat_application/core/constant/colors.dart';
+import 'package:chatapp/core/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 class LanguageButton extends StatelessWidget {
@@ -18,8 +18,10 @@ class LanguageButton extends StatelessWidget {
             color: AppColors.primaryColor,
             child: Text(
               textbutton,
-              style:
-                  const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],

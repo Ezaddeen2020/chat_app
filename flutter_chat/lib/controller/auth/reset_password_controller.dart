@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:chat_application/controller/auth/login_controller.dart';
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/core/functions/handling_data.dart';
-import 'package:chat_application/data/datasource/remote/auth/resetpassword_data.dart';
+import 'package:chatapp/controller/auth/login_controller.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/core/functions/handling_data.dart';
+import 'package:chatapp/data/datasource/remote/auth/auth_data.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +17,7 @@ class ResetPasswordControllerImp extends ResetPasswordController {
   String? email;
   late String idotp;
   StatusRequest statusRequest = StatusRequest.none;
-  late ResetpasswordData resetpasswordData = ResetpasswordData(Get.find());
+  late AuthData resetpasswordData = AuthData(Get.find());
   final LoginControllerImp loginController = Get.find();
   late String page;
   @override
@@ -47,7 +47,7 @@ class ResetPasswordControllerImp extends ResetPasswordController {
     }
     statusRequest = StatusRequest.loading;
     update();
-    var response = await resetpasswordData.postdata(email!, password.text, idotp);
+    var response = await resetpasswordData.resetPassFun(email!, password.text, idotp);
     log("=========================$response");
     statusRequest = handlingData(response);
     if (StatusRequest.success == statusRequest) {

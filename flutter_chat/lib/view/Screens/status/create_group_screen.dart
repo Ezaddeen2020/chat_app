@@ -1,8 +1,8 @@
-// // import 'package:chat_application/Contacts/contacts_card.dart';
-// import 'package:chat_application/view/widgets/Contacts/contacts_card.dart';
-// import 'package:chat_application/view/widgets/onboarding/avatar_card.dart';
-// // import 'package:chat_application/custom_Ui/button_card.dart';
-// import 'package:chat_application/data/models/chatmodel.dart';
+// // import 'package:chatapp/Contacts/contacts_card.dart';
+// import 'package:chatapp/view/widgets/Contacts/contacts_card.dart';
+// import 'package:chatapp/view/widgets/onboarding/avatar_card.dart';
+// // import 'package:chatapp/custom_Ui/button_card.dart';
+// import 'package:chatapp/data/models/chatmodel.dart';
 // import 'package:flutter/material.dart';
 
 // class CreateGroup extends StatefulWidget {

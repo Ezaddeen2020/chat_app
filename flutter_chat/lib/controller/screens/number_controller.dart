@@ -1,4 +1,4 @@
-// import 'package:chat_application/view/Screens/auth/verifying_screen.dart';
+// import 'package:chatapp/view/Screens/auth/verifying_screen.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 

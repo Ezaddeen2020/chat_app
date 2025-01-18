@@ -2,13 +2,14 @@
 
 import 'dart:convert';
 
-import 'package:chat_application/data/models/user_model.dart';
+import 'package:chatapp/data/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
   static const isLogin = "isLogin";
   static const email = "email";
   static const users = "user";
+  static const language = "language";
 
   // static const userId = "userID";
   // static const password = "password";
@@ -62,7 +63,9 @@ class Preferences {
 
 //===========================
   static Future<void> clearSharPreference() async {
+    var lang = getString(language);
     await pref.clear();
+    setString(language, lang);
   }
 
 //===========================

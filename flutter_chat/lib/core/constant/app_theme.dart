@@ -1,4 +1,4 @@
-import 'package:chat_application/core/constant/colors.dart';
+import 'package:chatapp/core/constant/colors.dart';
 import 'package:flutter/material.dart';
 
 ThemeData englishTheme = ThemeData(
@@ -15,8 +15,11 @@ ThemeData englishTheme = ThemeData(
       fontWeight: FontWeight.bold,
       color: AppColors.black,
     ),
-    bodyLarge:
-        TextStyle(color: AppColors.grey, fontWeight: FontWeight.bold, height: 2, fontSize: 14),
+    bodyLarge: TextStyle(
+        color: AppColors.grey,
+        fontWeight: FontWeight.bold,
+        height: 2,
+        fontSize: 14),
     // bodyMedium: TextStyle(
     //     color: AppColors.grey,
     //     fontWeight: FontWeight.bold,
@@ -25,6 +28,7 @@ ThemeData englishTheme = ThemeData(
   ),
   primarySwatch: Colors.blue,
 );
+
 
 ThemeData arabicTheme = ThemeData(
   // scaffoldBackgroundColor: AppColors.blue,
@@ -40,8 +44,11 @@ ThemeData arabicTheme = ThemeData(
       fontWeight: FontWeight.bold,
       color: AppColors.black,
     ),
-    bodyLarge:
-        TextStyle(color: AppColors.grey, fontWeight: FontWeight.bold, height: 2, fontSize: 14),
+    bodyLarge: TextStyle(
+        color: AppColors.grey,
+        fontWeight: FontWeight.bold,
+        height: 2,
+        fontSize: 14),
   ),
   primarySwatch: Colors.blue,
 );

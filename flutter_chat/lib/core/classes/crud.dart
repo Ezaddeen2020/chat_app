@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/core/functions/check_internet.dart';
-import 'package:chat_application/links_api.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/core/functions/check_internet.dart';
+import 'package:chatapp/links_api.dart';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 

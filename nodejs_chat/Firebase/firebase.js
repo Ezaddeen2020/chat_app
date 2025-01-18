@@ -1,6 +1,6 @@
 // sendNotification.js
 const admin = require("firebase-admin");
-const serviceAccount = require("C:/Users/LENOVO/Documents/keys/nodejs_chat/chatapp-83e16-firebase-adminsdk-2xkjz-4cbd573e6e.json");
+const serviceAccount = require("C:/Users/LENOVO/Documents/projects keys/nodejs_chat/chatapp-83e16-firebase-adminsdk-2xkjz-4cbd573e6e.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)

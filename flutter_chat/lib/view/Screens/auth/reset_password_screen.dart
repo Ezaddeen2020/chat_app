@@ -1,22 +1,19 @@
-import 'package:chat_application/controller/auth/reset_password_controller.dart';
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/core/constant/colors.dart';
-import 'package:chat_application/core/functions/valid_input.dart';
-import 'package:chat_application/view/widgets/auth/custom_bottom_auth.dart';
-import 'package:chat_application/view/widgets/auth/custom_text_body_auth.dart';
-import 'package:chat_application/view/widgets/auth/custom_text_title_auth.dart';
-import 'package:chat_application/view/widgets/auth/custom_textform_auth.dart';
+import 'package:chatapp/controller/auth/reset_password_controller.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/core/constant/colors.dart';
+import 'package:chatapp/core/functions/valid_input.dart';
+import 'package:chatapp/view/widgets/auth/custom_bottom_auth.dart';
+import 'package:chatapp/view/widgets/auth/custom_text_body_auth.dart';
+import 'package:chatapp/view/widgets/auth/custom_text_title_auth.dart';
+import 'package:chatapp/view/widgets/auth/custom_textform_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ResetPasswordScreen extends StatelessWidget {
+class ResetPasswordScreen extends GetView<ResetPasswordControllerImp> {
   const ResetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ResetPasswordControllerImp());
-    // Get.find<ResetPasswordControllerImp>();
-
     return WillPopScope(
         onWillPop: () async => false, // يمنع الرجوع للخلف
         child: Scaffold(

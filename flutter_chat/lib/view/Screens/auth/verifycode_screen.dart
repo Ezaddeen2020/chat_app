@@ -1,9 +1,9 @@
-import 'package:chat_application/controller/auth/verifycode_controller.dart';
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/core/constant/colors.dart';
-import 'package:chat_application/view/widgets/auth/custom_bottom_auth.dart';
-import 'package:chat_application/view/widgets/auth/custom_text_body_auth.dart';
-import 'package:chat_application/view/widgets/auth/custom_text_title_auth.dart';
+import 'package:chatapp/controller/auth/verifycode_controller.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/core/constant/colors.dart';
+import 'package:chatapp/view/widgets/auth/custom_bottom_auth.dart';
+import 'package:chatapp/view/widgets/auth/custom_text_body_auth.dart';
+import 'package:chatapp/view/widgets/auth/custom_text_title_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -13,7 +13,7 @@ class VerifycodeSignup extends GetView<VerifyCodeSignUpControllerImp> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(VerifyCodeSignUpControllerImp());
+    // Get.put(VerifyCodeSignUpControllerImp());
 
     return Scaffold(
       appBar: AppBar(

@@ -1,5 +1,5 @@
-import 'package:chat_application/controller/screens/message_conttoller.dart';
-import 'package:chat_application/data/models/chat_model.dart';
+import 'package:chatapp/controller/screens/message_conttoller.dart';
+import 'package:chatapp/data/models/chat_model.dart';
 import 'package:flutter/material.dart';
 import 'package:mc_utils/mc_utils.dart';
 
@@ -265,8 +265,8 @@ class MessageItem extends StatelessWidget {
 
 // import 'dart:developer';
 
-// import 'package:chat_application/controller/screens/message_conttoller.dart';
-// import 'package:chat_application/data/models/chat_model.dart';
+// import 'package:chatapp/controller/screens/message_conttoller.dart';
+// import 'package:chatapp/data/models/chat_model.dart';
 // import 'package:flutter/material.dart';
 // import 'package:mc_utils/mc_utils.dart';
 

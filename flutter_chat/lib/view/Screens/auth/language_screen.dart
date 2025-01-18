@@ -1,8 +1,10 @@
-import 'package:chat_application/core/constant/routes.dart';
-import 'package:chat_application/core/localization/change_local.dart';
-import 'package:chat_application/view/widgets/language/language_button.dart';
+
+import 'package:chatapp/core/constant/routes.dart';
+import 'package:chatapp/core/localization/change_local.dart';
+import 'package:chatapp/view/widgets/language/language_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 class MyLanguage extends GetView<LocaleController> {
   const MyLanguage({super.key});
@@ -27,7 +29,7 @@ class MyLanguage extends GetView<LocaleController> {
               textbutton: "En",
               onPressed: () {
                 controller.changelang("en");
-                Get.toNamed(AppRoute.login);
+                  Get.toNamed(AppRoute.login);
               },
             ),
           ],

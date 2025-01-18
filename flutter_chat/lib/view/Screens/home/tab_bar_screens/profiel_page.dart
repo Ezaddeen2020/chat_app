@@ -1,7 +1,7 @@
-import 'package:chat_application/core/constant/routes.dart';
-import 'package:chat_application/view/Screens/home/tab_bar_screens/custom_appbar.dart';
-import 'package:chat_application/view/Screens/status/my_status.dart';
-import 'package:chat_application/view/Screens/status/other_status.dart';
+import 'package:chatapp/core/constant/routes.dart';
+import 'package:chatapp/view/Screens/home/tab_bar_screens/custom_camera_appbar.dart';
+import 'package:chatapp/view/Screens/status/my_status.dart';
+import 'package:chatapp/view/Screens/status/other_status.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

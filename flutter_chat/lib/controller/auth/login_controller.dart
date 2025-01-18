@@ -1,14 +1,15 @@
 import 'dart:developer';
 
-import 'package:chat_application/data/datasource/remote/auth/login_data.dart';
-import 'package:chat_application/controller/screens/user_controller.dart';
+import 'package:chatapp/controller/screens/user_controller.dart';
+import 'package:chatapp/data/datasource/remote/auth/auth_data.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:chat_application/core/functions/handling_data.dart';
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/data/models/preferences.dart';
-import 'package:chat_application/data/models/user_model.dart';
-import 'package:chat_application/core/constant/routes.dart';
+import 'package:chatapp/core/functions/handling_data.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/data/models/preferences.dart';
+import 'package:chatapp/data/models/user_model.dart';
+import 'package:chatapp/core/constant/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 abstract class LoginController extends GetxController {
@@ -29,7 +30,7 @@ class LoginControllerImp extends LoginController {
 
   final GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   StatusRequest statusRequest = StatusRequest.none;
-  late LoginData logindata = LoginData(Get.find());
+  late AuthData authData = AuthData(Get.find());
   late TextEditingController email;
   late TextEditingController password;
   late String username;
@@ -63,6 +64,7 @@ class LoginControllerImp extends LoginController {
 
   void _loginWith() async {
     statusRequest = StatusRequest.loading;
+    EasyLoading.show(status: "....loading");
     var token = await FirebaseMessaging.instance.getToken();
     log("============ $token");
     update();
@@ -78,13 +80,14 @@ class LoginControllerImp extends LoginController {
       userImg: "",
     );
 
-    final response = await logindata.postdata(userModel);
+    final response = await authData.loginFun(userModel);
     log("========================= Controller $response");
     statusRequest = handlingData(response);
     if (statusRequest == StatusRequest.success) {
       if (response['status'] == "success") {
         try {
           if (response['page'] == "page_verifycode") {
+            EasyLoading.dismiss();
             Get.offNamed(AppRoute.emailVerifyCode, arguments: {
               'email': email.text,
               'password': password.text,
@@ -99,10 +102,14 @@ class LoginControllerImp extends LoginController {
             var user = UserModel.fromJson(resdata);
             Get.find<UserController>().setPreferenceUser(user);
             Preferences.setBoolean(Preferences.isLogin, true);
+            EasyLoading.dismiss();
             Get.offNamed(AppRoute.successSignUp);
           }
-        } catch (e) {}
+        } catch (e) {
+          EasyLoading.dismiss();
+        }
       } else {
+        EasyLoading.dismiss();
         Get.defaultDialog(title: "Warning", middleText: "Email Or Password Not Correct");
         statusRequest = StatusRequest.failure;
       }
@@ -185,7 +192,7 @@ class LoginControllerImp extends LoginController {
   //       userImg: user?.photoURL ?? "",
   //     );
 
-  //     final response = await logindata.postdata(userModel);
+  //     final response = await AuthData.postdata(userModel);
   //     log("========================= Controller $response");
   //     statusRequest = handlingData(response);
   //     if (statusRequest == StatusRequest.success) {

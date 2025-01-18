@@ -1,4 +1,4 @@
-// import 'package:chat_application/view/Screens/phone_number/number_screen.dart';
+// import 'package:chatapp/view/Screens/phone_number/number_screen.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 

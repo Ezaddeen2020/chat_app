@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:chat_application/controller/auth/login_controller.dart';
-import 'package:chat_application/core/classes/status_request.dart';
-import 'package:chat_application/core/constant/routes.dart';
-import 'package:chat_application/core/functions/handling_data.dart';
-import 'package:chat_application/data/datasource/remote/auth/checkemail_data.dart';
-import 'package:chat_application/data/datasource/remote/auth/verifycode_data.dart';
+import 'package:chatapp/controller/auth/login_controller.dart';
+import 'package:chatapp/core/classes/status_request.dart';
+import 'package:chatapp/core/constant/routes.dart';
+import 'package:chatapp/core/functions/handling_data.dart';
+import 'package:chatapp/data/datasource/remote/auth/auth_data.dart';
 import 'package:get/get.dart';
 
 abstract class VerifyCodeSignUpController extends GetxController {
@@ -17,9 +16,11 @@ abstract class VerifyCodeSignUpController extends GetxController {
 
 class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
   //=======  Parameters of verify Code   =========//
-  final LoginControllerImp loginController = Get.put(LoginControllerImp());
-  CheckEmailData checkEmailData = CheckEmailData(Get.find());
-  VerifycodeData verifycodeData = VerifycodeData(Get.find());
+  // final LoginControllerImp loginController = Get.put(LoginControllerImp());
+  LoginControllerImp loginController = Get.find<LoginControllerImp>();
+
+  AuthData checkEmailData = AuthData(Get.find());
+  AuthData verifycodeData = AuthData(Get.find());
   StatusRequest statusRequest = StatusRequest.none;
   bool isButtonDisabled = false; // حالة زر إعادة الإرسال
   // late String username;
@@ -47,8 +48,8 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
 
       // استدعاء API لإعادة إرسال الكود
       statusRequest = StatusRequest.loading;
-      update();
-      var response = await checkEmailData.postdata(email);
+      // update();
+      var response = await checkEmailData.resendCode(email, idotp);
       statusRequest = handlingData(response);
 
       if (statusRequest == StatusRequest.success) {
@@ -60,7 +61,7 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
         );
       }
 
-      Timer(const Duration(seconds: 20), () {
+      Timer(const Duration(seconds: 5), () {
         isButtonDisabled = false;
         update();
       });
@@ -73,7 +74,7 @@ class VerifyCodeSignUpControllerImp extends VerifyCodeSignUpController {
     statusRequest = StatusRequest.loading;
     update();
 
-    var response = await verifycodeData.postCode(code, idotp);
+    var response = await verifycodeData.verifyCodeFun(code, idotp);
     log("Controller Response: $response");
     statusRequest = handlingData(response);
 

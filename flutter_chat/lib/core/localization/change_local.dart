@@ -1,22 +1,19 @@
-import 'package:chat_application/core/services/services.dart';
+import 'package:chatapp/data/models/preferences.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
-// import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:mc_utils/mc_utils.dart';
 
 class LocaleController extends GetxController {
   Locale? language;
 
-  MyServices myServices = Get.find();
-
   changelang(String langcode) {
     Locale locale = Locale(langcode);
-    myServices.sharedPreferences.setString("lang", langcode);
+    Preferences.setString(Preferences.language, langcode);
     Get.updateLocale(locale);
   }
 
   @override
   void onInit() {
-    String? sharedPrefLang = myServices.sharedPreferences.getString("lang");
+    String? sharedPrefLang = Preferences.getString(Preferences.language);
     if (sharedPrefLang == "ar") {
       language = const Locale("ar");
     } else if (sharedPrefLang == "en") {

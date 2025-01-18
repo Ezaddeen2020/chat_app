@@ -1,9 +1,9 @@
-import 'package:chat_application/controller/screens/message_conttoller.dart';
+import 'package:chatapp/controller/screens/message_conttoller.dart';
 import 'package:flutter/material.dart';
 import 'package:mc_utils/mc_utils.dart';
 
-class chat_applicationBar extends StatelessWidget implements PreferredSizeWidget {
-  const chat_applicationBar({super.key});
+class ChatAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const ChatAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,22 +5,22 @@ import 'package:get/get.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key, this.userImage, this.userName});
-  final String? userImage;
-  final String? userName;
+  final String? userImage;  
+  final String? userName; 
   @override
   Widget build(BuildContext context) {
-    final String? userImage = Get.arguments?['user_img'];
-    // final String? userName = Get.arguments?['user_'];
+      final String? userImage = Get.arguments?['user_img'];  
+        // final String? userName = Get.arguments?['user_'];  
     return ListTile(
-      leading: Stack(
+      leading: Stack( 
         children: [
-          CircleAvatar(
+           CircleAvatar(
             radius: 27,
             backgroundColor: Colors.white,
-            backgroundImage: userImage != null
-                ? FileImage(File(userImage))
-                : const AssetImage("assets/images/photo.JPG") as ImageProvider,
-          ),
+            backgroundImage: userImage != null 
+            ? FileImage(File(userImage))
+            : const AssetImage("assets/images/photo.JPG") as ImageProvider,
+            ),
           Positioned(
             bottom: 0,
             right: 0,
@@ -49,9 +49,10 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
+
 // import 'dart:io';
 
-// import 'package:chat_application/controller/screens/user_controller.dart';
+// import 'package:chatapp/controller/screens/user_controller.dart';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 // class SettingsScreen extends StatelessWidget {

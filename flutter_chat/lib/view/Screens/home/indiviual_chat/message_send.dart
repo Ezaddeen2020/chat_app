@@ -1,5 +1,5 @@
-import 'package:chat_application/controller/screens/message_conttoller.dart';
-import 'package:chat_application/view/widgets/onboarding/emoji_picker.dart';
+import 'package:chatapp/controller/screens/message_conttoller.dart';
+import 'package:chatapp/view/widgets/onboarding/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:mc_utils/mc_utils.dart';
 

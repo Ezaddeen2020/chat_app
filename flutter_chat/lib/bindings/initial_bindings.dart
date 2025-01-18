@@ -1,6 +1,11 @@
-import 'package:chat_application/controller/home_controller.dart';
-import 'package:chat_application/controller/screens/user_controller.dart';
-import 'package:chat_application/core/classes/crud.dart';
+import 'package:chatapp/controller/auth/forgetpassword_controller.dart';
+import 'package:chatapp/controller/auth/login_controller.dart';
+import 'package:chatapp/controller/auth/reset_password_controller.dart';
+import 'package:chatapp/controller/auth/signup_controller.dart';
+import 'package:chatapp/controller/auth/verifycode_controller.dart';
+import 'package:chatapp/controller/home_controller.dart';
+import 'package:chatapp/controller/screens/user_controller.dart';
+import 'package:chatapp/core/classes/crud.dart';
 import 'package:get/get.dart';
 
 class InitialBindings extends Bindings {
@@ -8,8 +13,12 @@ class InitialBindings extends Bindings {
   void dependencies() {
     Get.put(Crud());
     Get.lazyPut(() => HomeController());
-    // Get.lazyPut(() => MessageController());
     Get.lazyPut(() => UserController());
+    Get.lazyPut(() => LoginControllerImp());
+    Get.lazyPut(() => SignUpControllerImp());
+    Get.lazyPut(() => ResetPasswordControllerImp());
+    Get.lazyPut(() => ForgetpasswordControllerImp());
+    Get.lazyPut(() => VerifyCodeSignUpControllerImp());
   }
 }
 
